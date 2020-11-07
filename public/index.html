@@ -1,11 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-database.js"></script>
+    <script>
+        var firebaseConfig = {
+            apiKey: "AIzaSyBXeGV6tZCFZ4zqngzq9SSzAq_eQn37Mfw",
+            authDomain: "testing-app-41448.firebaseapp.com",
+            databaseURL: "https://testing-app-41448.firebaseio.com",
+            projectId: "testing-app-41448",
+            storageBucket: "testing-app-41448.appspot.com",
+            messagingSenderId: "298812295281",
+            appId: "1:298812295281:web:f471f1dc2c9db819b933d0",
+            measurementId: "G-1VGPKKHKXL"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Firebase Testing</title>
     <link rel="stylesheet" href="./main.css">
-    
 </head>
 <body>
     <section class= 'sign-up'>
