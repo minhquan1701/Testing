@@ -5,6 +5,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-analytics.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-database.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-storage.js"></script>
     <script>
         var firebaseConfig = {
             apiKey: "AIzaSyBXeGV6tZCFZ4zqngzq9SSzAq_eQn37Mfw",
@@ -24,7 +25,7 @@
     <title>Firebase Testing</title>
     <link rel="stylesheet" href="./main.css">
 </head>
-<body>
+<body id="pageBody">
     <section class= 'sign-up'>
         <form class="sign-up-form">
             <h3>Team Sign Up</h3>
@@ -53,59 +54,48 @@
     </section>
     <section class="blogs-section">
         <div class='blogs-container'>
-          <h2>Blogs</h2>
-          <div class="dots-list">
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
+            <h2>Blogs</h2>
+            <div class="dots-list">
+                <span></span>
+                <span></span>
+                <span></span>
+        </div>
 
-          <div class="blogs-container__showcase">
+        <div class="blogs-container__showcase">
             <div class="blog-tag">
                 <div class="blog-tag__pic">
-                  <img src='../assets/blog-pic.jpg' alt="blog-pic">
+                    <img src='../assets/blog-pic.jpg' alt="blog-pic" id="blogPicA">
                 </div>
                 <div class="blog-tag__content">
-                    <h3 class="blog-tag__title">This Is A Blog Title</h3>
-                <p class='blog-tag__sub-title'>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Delectus, labore.</p>
-    
-                <a href="./blog-post.html">See More.</a>
+                    <h3 class="blog-tag__title" id="blogTitleA">TitleA</h3>
+                    <p class='blog-tag__sub-title' id="blogSubtitleA">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Delectus, labore.</p>
+                    <a href="./blog-post.html?title=TitleA">See More.</a>
                 </div>
-                
-              </div>
+            </div>
     
-              <div class="blog-tag">
+            <div class="blog-tag">
                 <div class="blog-tag__pic">
-                  <img src='../assets/blog-pic.jpg' alt="blog-pic">
+                    <img src='../assets/blog-pic.jpg' alt="blog-pic" id="blogPicB">
                 </div>
                 <div class="blog-tag__content">
-                    <h3 class="blog-tag__title">This Is A Blog Title</h3>
-                <p class='blog-tag__sub-title'>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Delectus, labore.</p>
-    
-                <a href="">See More.</a>
-
+                    <h3 class="blog-tag__title" id="blogTitleB">TitleB</h3>
+                    <p class='blog-tag__sub-title' id="blogSubtitleB">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Delectus, labore.</p>
+                    <a href="./blog-post.html?title=TitleB">See More.</a>
                 </div>
-                
-              </div>
+            </div>
     
-              <div class="blog-tag">
+            <div class="blog-tag">
                 <div class="blog-tag__pic">
-                  <img src='../assets/blog-pic.jpg' alt="blog-pic">
+                  <img src='../assets/blog-pic.jpg' alt="blog-pic" id="blogPicC">
                 </div>
                 <div class="blog-tag__content">
-                    <h3 class="blog-tag__title">This Is A Blog Title</h3>
-                    <p class='blog-tag__sub-title'>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Delectus, labore.</p>
-        
-                    <a href="">See More</a>
-
-                </div>
-               
-              </div>
-          </div>
-  
-          
+                    <h3 class="blog-tag__title" id="blogTitleC">TitleC</h3>
+                    <p class='blog-tag__sub-title' id="blogSubtitleC">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Delectus, labore.</p>
+                    <a href="./blog-post.html?title=TitleC">See More</a>
+                </div>      
+            </div>
         </div>
-      </section>
+    </section>
 
     <script src="./main.js"></script>
 </body>
