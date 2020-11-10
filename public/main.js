@@ -95,6 +95,8 @@ signUpForm.addEventListener('submit', (e) => {
 
 
 /*****FILES UPLOAD******/
+var fileLists;
+
 // Where to click to choose file
 const fileUploadField = document.querySelector('.file-upload__choose-field');
 
@@ -117,7 +119,7 @@ fileUploadField.addEventListener('click', () => {
 fileUpLoadInput.addEventListener('change', () => {
 
     //retrive the name of selected files.
-    let fileLists =Array.from(fileUpLoadInput.files).map((file) => {return file.name}); 
+    fileLists = Array.from(fileUpLoadInput.files).map((file) => {return file}); 
 
     //remove default span tag.
     selectedItem.style.display = 'none';
@@ -134,5 +136,12 @@ fileUpLoadInput.addEventListener('change', () => {
 
 // Handle submit file button.
 function submitFile(e) {
-    e.preventDefault();
+    //e.preventDefault();
+    let teamName = document.getElementById('teamName').value;
+    let childRefFolder = firebase_stRef.child(teamName);
+    fileLists.map((file) => {
+        let childRefFile = childRefFolder.child(teamName + "_" + file.name);
+        childRefFile.put(file);
+    })
+    console.log(fileLists);
 }
