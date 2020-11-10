@@ -84,4 +84,55 @@ signUpForm.addEventListener('submit', (e) => {
     // console.log(firebase_db.ref('members/').once('value').then((snapshot) => {
     //     console.log(snapshot.val());
     // }));
+
+
+
+
+
+
 })
+
+
+
+/*****FILES UPLOAD******/
+// Where to click to choose file
+const fileUploadField = document.querySelector('.file-upload__choose-field');
+
+// The input HTML tag that actually fires the choose file event. By default, this is hidden on front-end
+const fileUpLoadInput = document.querySelector('.file-upload__input');
+
+// Span displays name of chosen file
+const selectedItem = document.querySelector('.selected-item');
+
+// By default the span display no item.
+selectedItem.textContent='No Items Selected';
+
+// Trigger files upload pop up 
+fileUploadField.addEventListener('click', () => {
+    fileUpLoadInput.click();
+});
+
+
+// Listen for any change in 'file' input (when there is file selected)
+fileUpLoadInput.addEventListener('change', () => {
+
+    //retrive the name of selected files.
+    let fileLists =Array.from(fileUpLoadInput.files).map((file) => {return file.name}); 
+
+    //remove default span tag.
+    selectedItem.style.display = 'none';
+    
+    //create and display span tags coressponding to selected files.
+    fileLists.forEach((fileName) => {
+        let label = document.createElement('span'); 
+        label.textContent = fileName;
+        label.classList.add('selected-item');
+        document.querySelector('.selected-item-list').appendChild(label);
+    })
+    
+});
+
+// Handle submit file button.
+function submitFile(e) {
+    e.preventDefault();
+}

@@ -24,6 +24,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Firebase Testing</title>
     <link rel="stylesheet" href="./main.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+
 </head>
 <body id="pageBody">
     <section class= 'sign-up'>
@@ -95,6 +97,25 @@
                 </div>      
             </div>
         </div>
+    </section>
+
+    <section class="file-upload-container">
+        <div class="file-upload">
+        
+        <div class="file-upload__choose-field">
+            <input type="file" class="file-upload__input" name="file-upload__input" multiple hidden= 'hidden'/>
+            <i class="fas fa-cloud-upload-alt" style='display: block'></i>
+            <p>Choose File(s) Upload</p> 
+        </div>
+
+        <h4>Uploaded Files</h4>
+        <div class='selected-item-list'>
+            <span class="selected-item"></span>
+        </div>
+       
+       <button type="submit" class="submit-file-btn" onclick="submitFile()">Submit</button>
+        </div>
+        
     </section>
 
     <script src="./main.js"></script>
