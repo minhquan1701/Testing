@@ -117,7 +117,7 @@ fileUploadField.addEventListener('click', () => {
 
 // Listen for any change in 'file' input (when there is file selected)
 fileUpLoadInput.addEventListener('change', () => {
-
+    document.querySelector('.selected-item-list').textContent = null 
     //retrive the name of selected files.
     fileLists = Array.from(fileUpLoadInput.files).map((file) => {return file}); 
 
@@ -127,7 +127,7 @@ fileUpLoadInput.addEventListener('change', () => {
     //create and display span tags coressponding to selected files.
     fileLists.forEach((fileName) => {
         let label = document.createElement('span'); 
-        label.textContent = fileName;
+        label.textContent = fileName.name;
         label.classList.add('selected-item');
         document.querySelector('.selected-item-list').appendChild(label);
     })
@@ -137,11 +137,20 @@ fileUpLoadInput.addEventListener('change', () => {
 // Handle submit file button.
 function submitFile(e) {
     //e.preventDefault();
+    document.querySelector('.selected-item-list').textContent = null 
     let teamName = document.getElementById('teamName').value;
     let childRefFolder = firebase_stRef.child(teamName);
     fileLists.map((file) => {
         let childRefFile = childRefFolder.child(teamName + "_" + file.name);
-        childRefFile.put(file);
-    })
+        childRefFile.put(file)
+            .then((snapshot) => {if (snapshot.state == 'success') {
+                let label = document.createElement('span'); 
+                label.textContent = "Successfully upload " + file.name;
+                label.classList.add('selected-item');
+                document.querySelector('.selected-item-list').appendChild(label);
+            }})
+            .catch((error) => (console.log(error)));
+    });
+    fileLists = null;
     console.log(fileLists);
 }
