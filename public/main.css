@@ -197,15 +197,23 @@ a {
 }
 .selected-item {
   width: 100%;
-  display: block;
+  display: flex;
+  justify-content: space-between;
   background-color: #ededf1;
   padding: 1rem 1.2rem;
   font-size: 0.9rem;
   border-radius: 4px;
   color: #55558d;
-  text-overflow: ellipsis;
+
   margin-bottom: 0.3rem;
 }
+span {
+  overflow: hidden;
+  width: 200px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .submit-file-btn {
   margin-top: 2rem;
   border-radius: 4px;
@@ -220,4 +228,11 @@ a {
   font-size: 1.3rem;
   cursor: pointer;
   box-shadow: 0px 4px 5px rgba(0, 0, 0, 9%);
+}
+.on-submiting {
+  opacity: 0.5;
+  pointer-events: none;
+}
+.remove-item {
+  cursor: pointer;
 }

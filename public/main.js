@@ -104,32 +104,43 @@ const fileUploadField = document.querySelector('.file-upload__choose-field');
 const fileUpLoadInput = document.querySelector('.file-upload__input');
 
 // Span displays name of chosen file
-const selectedItem = document.querySelector('.selected-item');
-
-// By default the span display no item.
-selectedItem.textContent='No Items Selected';
+const selectedItem = document.querySelector('.selected-item > span');
+const newItemTemplate = document.querySelector('.selected-item').cloneNode(true);
 
 // Trigger files upload pop up 
 fileUploadField.addEventListener('click', () => {
     fileUpLoadInput.click();
 });
 
-
 // Listen for any change in 'file' input (when there is file selected)
 fileUpLoadInput.addEventListener('change', () => {
-    document.querySelector('.selected-item-list').textContent = null 
     //retrive the name of selected files.
     fileLists = Array.from(fileUpLoadInput.files).map((file) => {return file}); 
-
-    //remove default span tag.
-    selectedItem.style.display = 'none';
     
+    
+    if (fileLists.length !== 0 ){
+        document.querySelector('.default-span-tag').parentElement.style.display = 'none';
+    }
+
     //create and display span tags coressponding to selected files.
     fileLists.forEach((fileName) => {
-        let label = document.createElement('span'); 
-        label.textContent = fileName.name;
-        label.classList.add('selected-item');
-        document.querySelector('.selected-item-list').appendChild(label);
+        let newSelectItem = newItemTemplate.cloneNode(true);
+        
+        newSelectItem.getElementsByTagName('SPAN')[0].textContent = fileName.name;
+        newSelectItem.getElementsByTagName('I')[0].style.display = 'initial'; 
+       
+        newSelectItem.addEventListener('click', (e)=>{
+            if(e.target.tagName === 'I'){
+                newSelectItem.remove();
+                if (document.querySelector('.selected-item-list').childElementCount === 1){ 
+                    document.querySelector('.default-span-tag').parentElement.style.display = 'flex';
+                    
+                }
+            };
+        })
+
+        /* label.classList.add('selected-item'); */
+        document.querySelector('.selected-item-list').appendChild(newSelectItem);
     })
     
 });
@@ -137,20 +148,29 @@ fileUpLoadInput.addEventListener('change', () => {
 // Handle submit file button.
 function submitFile(e) {
     //e.preventDefault();
-    document.querySelector('.selected-item-list').textContent = null 
     let teamName = document.getElementById('teamName').value;
     let childRefFolder = firebase_stRef.child(teamName);
+    document.querySelector('.submit-file-btn').classList.add('on-submiting');
+
     fileLists.map((file) => {
         let childRefFile = childRefFolder.child(teamName + "_" + file.name);
         childRefFile.put(file)
-            .then((snapshot) => {if (snapshot.state == 'success') {
-                let label = document.createElement('span'); 
-                label.textContent = "Successfully upload " + file.name;
-                label.classList.add('selected-item');
-                document.querySelector('.selected-item-list').appendChild(label);
+            .then((snapshot) => {
+                
+                if (snapshot.state == 'success') {
+                document.querySelector('.submit-file-btn').classList.remove('on-submiting');
+                
+                document.querySelectorAll('.selected-item > span').forEach((spanTag) => {
+                    if (spanTag.textContent === file.name){
+                        spanTag.textContent = "Successfully upload " + file.name;
+                        spanTag.nextElementSibling.style.display = 'none';
+                    }
+                })
+                
             }})
             .catch((error) => (console.log(error)));
     });
     fileLists = null;
+    
     console.log(fileLists);
 }

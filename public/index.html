@@ -110,10 +110,14 @@
 
         <h4>Uploaded Files</h4>
         <div class='selected-item-list'>
-            <span class="selected-item"></span>
+            <div class="selected-item">
+                <span class="default-span-tag">No Item Selected</span>
+                <i class="fas fa-times" style='display: none; cursor: pointer;'></i>
+            </div>
+            
         </div>
        
-       <button type="submit" class="submit-file-btn" onclick="submitFile()">Submit</button>
+       <button type="button" class="submit-file-btn" onclick="submitFile()">Submit</button>
         </div>
         
     </section>
