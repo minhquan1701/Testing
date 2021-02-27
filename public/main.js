@@ -12,9 +12,10 @@ let signUpForm = document.querySelector('.sign-up-form');
 window.onload = (e) => {
     let collection_ref = firebase_db.collection("blogposts");
     collection_ref.orderBy("name").limit(3).get().then(function(querySnapshot) {
-        let blogList = []
+        let blogList = [];
         querySnapshot.docs.map(doc => blogList.push(doc.data()));
         console.log(firebase_stRef.child(blogList[0].name + ".png").fullPath);
+
         let blogA_title = document.getElementById("blogTitleA");
         let blogA_sub = document.getElementById("blogSubtitleA");
         let blogA_pic = document.getElementById("blogPicA");
@@ -45,6 +46,30 @@ window.onload = (e) => {
         //blogC_pic.src = firebase_stRef.child(blogList[0].name + ".png").fullPath;
     }).catch(function(error) {
         console.log("Error Reading Blog Error");
+    })
+
+    // Upvote content test
+    collection_ref = firebase_db.collection("upvote_test");
+    collection_ref.orderBy("content").get().then(function(querySnapshot) {
+        let contentList = []
+        querySnapshot.docs.map(doc => contentList.push(doc.data()));
+
+        let blogA_upvote = document.getElementById("blogAUpvote"); 
+        let blogA_content = document.getElementById("blogAContent");
+        blogA_content.innerText = "Vote for " + contentList[0].content;
+        blogA_upvote.innerText = contentList[0].upvote;
+
+        let blogB_upvote = document.getElementById("blogBUpvote"); 
+        let blogB_content = document.getElementById("blogBContent");
+        blogB_content.innerText = "Vote for " + contentList[1].content;
+        blogB_upvote.innerText = contentList[1].upvote;
+
+        let blogC_upvote = document.getElementById("blogCUpvote"); 
+        let blogC_content = document.getElementById("blogCContent");
+        blogC_content.innerText = "Vote for " + contentList[2].content;
+        blogC_upvote.innerText = contentList[2].upvote;
+    }).catch(function(error) {
+        console.log(error);
     })
 }
 
@@ -84,12 +109,6 @@ signUpForm.addEventListener('submit', (e) => {
     // console.log(firebase_db.ref('members/').once('value').then((snapshot) => {
     //     console.log(snapshot.val());
     // }));
-
-
-
-
-
-
 })
 
 
@@ -173,4 +192,18 @@ function submitFile(e) {
     fileLists = null;
     
     console.log(fileLists);
+}
+
+function handleUpvote(object) {
+    let upvote_ref = firebase_db.collection("upvote_test");
+    let content_id = null;
+    upvote_ref.where("content", "==", object.id).get().then(function(querySnapshot) {
+        querySnapshot.forEach((doc) => {
+            content_id = doc.id;
+        });
+    }).then((e) => {
+        upvote_ref.doc(content_id).update({
+            upvote: firebase.firestore.FieldValue.increment(1)
+        })
+    });
 }
